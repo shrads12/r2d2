@@ -1,0 +1,156 @@
+:root {
+    --rowNum: 0;
+    --colNum: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+*:focus {
+    outline-color: black;
+}
+
+.game-container {
+    position: relative;
+    margin: auto;
+}
+
+.grid-container {
+    display: inline-grid;
+    grid-template-rows: repeat(var(--rowNum), 100px);
+    grid-template-columns: repeat(var(--colNum), 100px);
+    grid-gap: 2px;
+    margin-right: 20px;
+}
+
+.item {
+    background: #98FB98;
+    border: none;
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0.6;
+    margin: auto;
+    background: black;
+    height: 100%;
+    width: 100%;
+}
+
+.playAgain {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.playAgain .message {
+    color: white;
+    font-weight: bold;
+}
+
+.playAgain button {
+    width: 150px;
+    height: 50px;
+    border: none;
+    outline: none; /*not ideal*/
+    border-radius: 10px;
+    background: white;
+    font-size: 18px;
+}
+
+.avatar {
+    background-image: url(../images/r2d2.svg);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.fire {
+    background-image: url(../images/fire.svg);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.lightsaber {
+    background-image: url(../images/lightsaber.svg);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.darthvader {
+    background-image: url(../images/darthvader.svg);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.avatar.fire {
+    background-image: url(../images/r2d2.svg), url(../images/fire.svg);
+}
+
+.avatar.lightsaber {
+    background-image: url(../images/r2d2.svg), url(../images/lightsaber.svg);
+    background-position: left, right;
+}
+
+.avatar.darthvader {
+    background-image: url(../images/r2d2.svg), url(../images/darthvader.svg);
+    background-position: left, right;
+}
+
+.avatar.medal {
+    background-image: url(../images/r2d2.svg), url(../images/medal.svg);
+    background-position: left, right;
+}
+
+@keyframes blinking {
+    from {border: none}
+    to {border: 2px solid black;}
+}
+
+.medal {
+    background-image: url(../images/medal.svg);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* animation-name: blinking;
+    animation-duration: 1s;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease; */
+}
+
+.object-container {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.object {
+    background-color: lightblue;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.target {
+    background-color: rgb(214, 109, 167);
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.trophy {
+    width: 100px;
+    height: 100px;
+}
