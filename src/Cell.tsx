@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, RefObject, useRef } from 'react';
 
 interface Props {
     items: string[];
@@ -7,12 +7,18 @@ interface Props {
 
 export const Cell = (props: Props) => {
 
+    let btnRef = useRef<HTMLButtonElement>()
+
     const classMap = {
         M: 'medal',
         F: 'fire',
         L: 'lightsaber',
         V: 'darthvader'
     }
+
+    useEffect(() => {
+        props.isCurrentCell && btnRef.current && btnRef.current.focus();
+    });
 
     const getClasses = () => {
         const classes = props.items.map(item => {
@@ -27,6 +33,6 @@ export const Cell = (props: Props) => {
     }
 
     return (
-        <button autoFocus={props.isCurrentCell} className={`item ${getClasses()}`}></button>
+        <button ref={btnRef} className={`item ${getClasses()}`}></button>
     )
 }

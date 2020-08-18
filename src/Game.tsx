@@ -13,8 +13,8 @@ interface State {
 
 export default class Game extends React.Component<{}, State> {
 
-    private numTargets = 2;
-    private interval:any;
+    private numTargets = 10;
+    private interval: any;
 
     constructor(props) {
         super(props);
@@ -24,14 +24,14 @@ export default class Game extends React.Component<{}, State> {
     }
 
     componentDidMount() {
-        // this.interval = setInterval(this.useInterval, 5000);
+        this.interval = setInterval(this.useInterval(), 5000);
     }
 
     useInterval() {
         return () => {
-            this.setState(({board, currentPosition}) => {
+            this.setState(({ board, currentPosition }) => {
                 const newPlan = changePlan(board, currentPosition);
-                return {board: newPlan, currentPosition: this.findPosition(newPlan)}
+                return { board: newPlan, currentPosition: this.findPosition(newPlan) }
             });
         }
     }
@@ -55,8 +55,7 @@ export default class Game extends React.Component<{}, State> {
 
 
     getInitialState = () => {
-
-        const plan = createPlan(5, this.numTargets, 5, 5);
+        const plan = createPlan(10, this.numTargets, 10, 10);
         return {
             board: plan,
             currentPosition: this.findPosition(plan),
@@ -66,16 +65,16 @@ export default class Game extends React.Component<{}, State> {
         }
     }
 
- 
+
     restart = () => {
-        this.setState(this.getInitialState());
+        this.setState(this.getInitialState(), this.useInterval);
     }
 
 
     didIWin = () => {
         const [i, j] = this.state.currentPosition;
         if (this.state.board[i][j] === 'M' && this.state.targets.length === this.numTargets) {
-            this.setState({won: true }, () => {
+            this.setState({ won: true }, () => {
                 clearInterval(this.interval);
             });
         }
@@ -87,24 +86,24 @@ export default class Game extends React.Component<{}, State> {
         if (!Objects[object]) return;
         switch (object) {
             case 'L': {
-                this.setState(({objects, board})=> {
+                this.setState(({ objects, board }) => {
                     if (Objects[object]) {
                         objects.push(object);
                         board[i][j] = '0';
                     }
-                    return {objects, board};
+                    return { objects, board };
                 });
                 break;
             }
             case 'V': {
                 const [i, j] = this.state.currentPosition;
                 const object = this.state.board[i][j];
-                this.setState(({objects, board, targets}) => {
+                this.setState(({ objects, board, targets }) => {
                     if (objects.indexOf('L') !== -1) {
                         board[i][j] = '0';
                         targets.push(object);
                     }
-                    return {board, targets};
+                    return { board, targets };
                 })
                 break;
             }
@@ -129,23 +128,23 @@ export default class Game extends React.Component<{}, State> {
         document.documentElement.style.setProperty("--colNum", this.state.board[0].length.toString());
 
 
-    return (
-        <div className="game-container">
-            <Grid board={this.state.board} onMove={this.updatePosition} currentPosition={this.state.currentPosition} 
-                onEnter={this.onEnter}></Grid>
-            <div className="object-container">
-                {this.state.objects.map(obj => {
-                    return <div className={`object ${Objects[obj]}`}></div>
-                })}
-                {this.state.targets.map(obj => {
-                    return <div className={`target ${Objects[obj]}`}></div>
-                })}
+        return (
+            <div className="game-container">
+                <Grid board={this.state.board} onMove={this.updatePosition} currentPosition={this.state.currentPosition}
+                    onEnter={this.onEnter}></Grid>
+                <div className="object-container">
+                    {this.state.objects.map(obj => {
+                        return <div className={`object ${Objects[obj]}`}></div>
+                    })}
+                    {this.state.targets.map(obj => {
+                        return <div className={`target ${Objects[obj]}`}></div>
+                    })}
+                </div>
+                {this.state.won != null &&
+                    <GameEnd won={this.state.won} restart={this.restart}></GameEnd>
+                }
             </div>
-            {this.state.won != null &&
-                <GameEnd won={this.state.won} restart={this.restart}></GameEnd>
-            }
-        </div>
-    );
+        );
     }
 
 
