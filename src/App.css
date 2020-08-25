@@ -3,7 +3,7 @@
     --colNum: 0;
     --cellSize: 50px;
     --cellBackgroundColor: #98FB98;
-    --avatarUrl: url('../images/jedi.svg');
+    --avatarUrl: url('/images/jedi.svg');
 }
 
 body {
@@ -78,42 +78,42 @@ body {
 }
 
 .fire {
-    background-image: url(../images/fire.svg);
+    background-image: url(/images/fire.svg);
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .lightsaber {
-    background-image: url(../images/lightsaber.svg);
+    background-image: url(/images/lightsaber.svg);
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .darthvader {
-    background-image: url(../images/darthvader.svg);
+    background-image: url(/images/darthvader.svg);
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .avatar.fire {
-    background-image: var(--avatarUrl), url(../images/fire.svg);
+    background-image: var(--avatarUrl), url(/images/fire.svg);
 }
 
 .avatar.lightsaber {
-    background-image: var(--avatarUrl), url(../images/lightsaber.svg);
+    background-image: var(--avatarUrl), url(/images/lightsaber.svg);
     background-position: left, right;
 }
 
 .avatar.darthvader {
-    background-image: var(--avatarUrl), url(../images/darthvader.svg);
+    background-image: var(--avatarUrl), url(/images/darthvader.svg);
     background-position: left, right;
 }
 
 .avatar.medal {
-    background-image: var(--avatarUrl), url(../images/medal.svg);
+    background-image: var(--avatarUrl), url(/images/medal.svg);
     background-position: left, right;
 }
 
@@ -123,7 +123,7 @@ body {
 }
 
 .medal {
-    background-image: url(../images/medal.svg);
+    background-image: url(/images/medal.svg);
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
