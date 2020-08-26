@@ -8,4 +8,4 @@ app.get('/', (req, res) => res.send('Shraddha says Hi!'));
 app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, "dist", "index.html")));
 
 console.log('Starting server on 8080...');
-app.listen(8082);
+app.listen(process.env.PORT || 8080);
