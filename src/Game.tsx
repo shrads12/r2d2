@@ -133,11 +133,11 @@ export default class Game extends React.Component<{}, State> {
                 <Grid board={this.state.board} onMove={this.updatePosition} currentPosition={this.state.currentPosition}
                     onEnter={this.onEnter}></Grid>
                 <div className="object-container">
-                    {this.state.objects.map(obj => {
-                        return <div className={`object ${Objects[obj]}`}></div>
+                    {this.state.objects.map((obj, i) => {
+                        return <div key={obj + i} className={`object ${Objects[obj]}`}></div>
                     })}
-                    {this.state.targets.map(obj => {
-                        return <div className={`target ${Objects[obj]}`}></div>
+                    {this.state.targets.map((obj, i) => {
+                        return <div key={obj + i} className={`target ${Objects[obj]}`}></div>
                     })}
                 </div>
                 {this.state.won != null &&
