@@ -1,152 +1,33 @@
-import React, { useState } from 'react';
-import { Objects, createPlan, changePlan } from './gamePlans';
-import { GameEnd } from './GameEnd';
-import { Grid } from './Grid';
+import React, { useEffect, useState } from "react";
+import { Board } from "./Board";
+import { setupBoard } from "./util";
 
-interface State {
-    board: string[][];
-    currentPosition: number[];
-    won: boolean;
-    objects: string[],
-    targets: string[]
-}
+export function Game() {
+  const [board, setBoard] = useState<string[][]>();
+  const config = {
+    targets: 5,
+    obstacles: 15,
+    rows: 10,
+    columns: 10,
+  };
 
-export default class Game extends React.Component<{}, State> {
+  useEffect(() => {
+    createBoard();
+  }, []);
 
-    private numTargets = 10;
-    private interval: any;
+  function createBoard() {
+    const board = setupBoard(config);
+    setBoard(board);
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = this.getInitialState();
-        this.useInterval = this.useInterval.bind(this);
-        this.restart = this.restart.bind(this);
-    }
+  function restart() {
+    createBoard();
+  }
 
-    componentDidMount() {
-        this.interval = setInterval(this.useInterval(), 5000);
-    }
-
-    useInterval() {
-        return () => {
-            this.setState(({ board, currentPosition }) => {
-                const newPlan = changePlan(board, currentPosition);
-                return { board: newPlan, currentPosition: this.findPosition(newPlan) }
-            });
-        }
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
-
-    findPosition = (board) => {
-        let pos;
-        board.some((row, i) => {
-            return row.some((col, j) => {
-                if (col === 'S') {
-                    pos = [i, j];
-                    return true;
-                }
-            });
-        });
-        return pos;
-    }
-
-
-    getInitialState = () => {
-        const plan = createPlan(10, this.numTargets, 10, 10);
-        return {
-            board: plan,
-            currentPosition: this.findPosition(plan),
-            won: null,
-            objects: [],
-            targets: []
-        }
-    }
-
-
-    restart = () => {
-        this.setState(this.getInitialState(), this.useInterval);
-    }
-
-
-    didIWin = () => {
-        const [i, j] = this.state.currentPosition;
-        if (this.state.board[i][j] === 'M' && this.state.targets.length === this.numTargets) {
-            this.setState({ won: true }, () => {
-                clearInterval(this.interval);
-            });
-        }
-    }
-
-    onEnter = () => {
-        const [i, j] = this.state.currentPosition;
-        const object = this.state.board[i][j];
-        if (!Objects[object]) return;
-        switch (object) {
-            case 'L': {
-                this.setState(({ objects, board }) => {
-                    if (Objects[object]) {
-                        objects.push(object);
-                        board[i][j] = '0';
-                    }
-                    return { objects, board };
-                });
-                break;
-            }
-            case 'V': {
-                const [i, j] = this.state.currentPosition;
-                const object = this.state.board[i][j];
-                this.setState(({ objects, board, targets }) => {
-                    if (objects.indexOf('L') !== -1) {
-                        board[i][j] = '0';
-                        targets.push(object);
-                    }
-                    return { board, targets };
-                })
-                break;
-            }
-            case 'M':
-                this.didIWin();
-                break;
-        }
-    }
-
-    updatePosition = (newPosition) => {
-        let { board, won } = this.state;
-        const [newRow, newCol] = newPosition;
-        if (board[newRow][newCol] === 'F') {
-            won = false;
-        }
-        this.setState({ board, currentPosition: [newRow, newCol], won });
-    }
-
-    render() {
-
-        document.documentElement.style.setProperty("--rowNum", this.state.board.length.toString());
-        document.documentElement.style.setProperty("--colNum", this.state.board[0].length.toString());
-
-
-        return (
-            <div className="game-container">
-                <Grid board={this.state.board} onMove={this.updatePosition} currentPosition={this.state.currentPosition}
-                    onEnter={this.onEnter}></Grid>
-                <div className="object-container">
-                    {this.state.objects.map((obj, i) => {
-                        return <div key={obj + i} className={`object ${Objects[obj]}`}></div>
-                    })}
-                    {this.state.targets.map((obj, i) => {
-                        return <div key={obj + i} className={`target ${Objects[obj]}`}></div>
-                    })}
-                </div>
-                {this.state.won != null &&
-                    <GameEnd won={this.state.won} restart={this.restart}></GameEnd>
-                }
-            </div>
-        );
-    }
-
-
-
+  return (
+    <div className="main">
+      <h2>Welcome to Star Wars!</h2>
+      {board && <Board board={board} gameConfig={config} restart={restart} />}
+    </div>
+  );
 }

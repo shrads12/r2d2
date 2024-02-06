@@ -1,18 +1,17 @@
 {
-    "compilerOptions": {
-        "outDir": "./dist/",
-        "sourceMap": true,
-        "noImplicitAny": true,
-        "lib": ["es6", "dom"],
-        "module": "es6",
-        "target": "es5",
-        "jsx": "react",
-        "moduleResolution": "node",
-        // For typescript to understand export default
-        "allowSyntheticDefaultImports": true,
-        "noImplicitAny": false
-    },
-    "exclude": [
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "lib": ["es6", "dom"],
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
+    "moduleResolution": "node",
+    // For typescript to understand export default
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*", "src/svg.d.ts"],
+  "exclude": ["node_modules"]
 }
