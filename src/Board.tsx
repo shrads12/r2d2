@@ -47,6 +47,12 @@ export function Board({ board: zeroState, gameConfig, restart }: Props) {
     return () => clearInterval(interval);
   }, [zeroState]);
 
+  useEffect(() => {
+    if (game.currentPosition.length) {
+      play();
+    }
+  }, [game.currentPosition]);
+
   function changeBoard() {
     setGame((game) => {
       const { board, currentPosition } = game;
@@ -137,9 +143,16 @@ export function Board({ board: zeroState, gameConfig, restart }: Props) {
     let { board } = game;
     const [newRow, newCol] = newPosition;
     setGame((game) => ({ ...game, currentPosition: [newRow, newCol] }));
-    if (board[newRow][newCol] === "obstacle") {
+    if (
+      board[newRow][newCol] === "obstacle" ||
+      (board[newRow][newCol] === "target" && !hasWeapon())
+    ) {
       endGame(false);
     }
+  }
+
+  function hasWeapon() {
+    return game.tokens.includes("weapon");
   }
 
   if (!game.board) {
@@ -152,7 +165,7 @@ export function Board({ board: zeroState, gameConfig, restart }: Props) {
         board={game.board}
         onMove={updatePosition}
         currentPosition={game.currentPosition}
-        onEnter={play}
+        hidden={game.targets.length < gameConfig.targets ? "end" : null}
       ></Grid>
       <div className="object-container">
         {game.tokens.map((obj, i) => {

@@ -2,18 +2,32 @@
   --rowNum: 0;
   --colNum: 0;
   --cellSize: 50px;
-  --cellBackgroundColor: #98fb98;
+  --cellBackgroundColor: #333333;
   --avatarUrl: url("/images/jedi.svg");
 }
 
 html,
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  height: 100%;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
+  font-size: 16px;
+  color: #fff;
+}
+
+body {
+  margin: 50px 25%;
+  overflow: auto;
 }
 
 p {
   margin: 0;
+}
+
+button {
+  padding: 0;
 }
 
 *:focus {
@@ -40,8 +54,9 @@ p {
   flex: 1;
   align-items: center;
   flex-direction: column;
-  row-gap: 40px;
+  row-gap: 25px;
   justify-content: center;
+  text-align: center;
 }
 
 .game-container {
@@ -110,6 +125,8 @@ p {
   background-size: 50%;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: #f0ffff;
+  height: 100%;
 }
 
 .obstacle {
@@ -117,6 +134,7 @@ p {
   background-size: 50%;
   background-repeat: no-repeat;
   background-position: center;
+  height: 100%;
 }
 
 .weapon {
@@ -124,6 +142,9 @@ p {
   background-size: 50%;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: #ffff00;
+  /* background-color: #0000FF; */
+  height: 100%;
 }
 
 .target {
@@ -131,6 +152,7 @@ p {
   background-size: 50%;
   background-repeat: no-repeat;
   background-position: center;
+  height: 100%;
 }
 
 .avatar.obstacle {
@@ -148,7 +170,7 @@ p {
 }
 
 .avatar.end {
-  background-image: var(--avatarUrl), url(/images/medal.svg);
+  background-image: var(--avatarUrl), url(/images/star.svg);
   background-position: left, right;
 }
 
@@ -162,15 +184,11 @@ p {
 }
 
 .end {
-  background-image: url(/images/medal.svg);
-  background-size: 50%;
+  background-image: url(/images/star.svg);
+  background-size: 70%;
   background-repeat: no-repeat;
   background-position: center;
-  /* animation-name: blinking;
-    animation-duration: 1s;
-    animation-delay: 2s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease; */
+  height: 100%;
 }
 
 .token-container {
@@ -183,10 +201,13 @@ p {
 }
 
 .target {
-  background-color: rgb(214, 109, 167);
+  background-color: #4d4d4d;
 }
 
 .trophy {
   width: 100px;
   height: 100px;
+}
+.hidden {
+  display: none;
 }

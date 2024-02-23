@@ -24,10 +24,5 @@ export function Game() {
     createBoard();
   }
 
-  return (
-    <div className="main">
-      <h2>Welcome to Star Wars!</h2>
-      {board && <Board board={board} gameConfig={config} restart={restart} />}
-    </div>
-  );
+  return board && <Board board={board} gameConfig={config} restart={restart} />;
 }

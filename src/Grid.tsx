@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Cell } from "./Cell";
 import "./App.css";
 
@@ -6,7 +6,7 @@ interface Props {
   board: string[][];
   currentPosition: number[];
   onMove: (newPosition: number[]) => void;
-  onEnter: () => void;
+  hidden?: string;
 }
 
 export const Grid = (props: Props) => {
@@ -24,8 +24,6 @@ export const Grid = (props: Props) => {
       case "ArrowDown":
         props.onMove(moveDown());
         break;
-      case "Enter":
-        props.onEnter();
       default:
         console.log("Do nothing", event.key);
     }
@@ -65,6 +63,7 @@ export const Grid = (props: Props) => {
               props.currentPosition[0] === i && props.currentPosition[1] === j;
             return (
               <Cell
+                hidden={cell === props?.hidden}
                 items={[cell]}
                 key={i + "#" + j}
                 isCurrentCell={isCurrentPosition}
