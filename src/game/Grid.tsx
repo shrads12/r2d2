@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Cell } from "./Cell";
-import "./App.css";
 
 interface Props {
   board: string[][];
@@ -11,6 +10,7 @@ interface Props {
 
 export const Grid = (props: Props) => {
   function handleKeyDown(event: any) {
+    // TODO: Handle tab key
     switch (event.key) {
       case "ArrowLeft":
         props.onMove(moveLeft());
@@ -27,7 +27,6 @@ export const Grid = (props: Props) => {
       default:
         console.log("Do nothing", event.key);
     }
-    event.preventDefault();
   }
 
   const moveLeft = () => {

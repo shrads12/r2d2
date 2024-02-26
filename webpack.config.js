@@ -10,7 +10,10 @@ module.exports = {
   },
   devtool: "inline-source-map",
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: [".ts", ".tsx", ".js", ".css"],
+    alias: {
+      images: path.resolve(__dirname, "images"),
+    },
   },
   module: {
     rules: [
@@ -19,7 +22,20 @@ module.exports = {
         use: ["ts-loader"],
       },
       {
+        test: /\.module\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+            },
+          },
+        ],
+      },
+      {
         test: /\.(s[ac]ss|css)$/i,
+        exclude: /\.module\.css$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {

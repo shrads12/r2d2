@@ -7,11 +7,10 @@
     "target": "es5",
     "jsx": "react",
     "moduleResolution": "node",
-    // For typescript to understand export default
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "esModuleInterop": true
   },
-  "include": ["src/**/*", "src/svg.d.ts"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*", "src/global.d.ts"],
+  "exclude": ["node_modules", "./dist/"]
 }

@@ -1,2 +1,6 @@
-node_modules
-dist
+node_modules/
+dist/
+.firebaserc
+firebase.json
+.DS_Store
+hosting.*.cache

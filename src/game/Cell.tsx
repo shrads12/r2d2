@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { isToken } from "./util";
-import "./App.css";
+import { isToken } from "../util";
 
 interface Props {
   items: string[];

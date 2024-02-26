@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { changePlan, isToken } from "./util";
+import { changePlan, isToken } from "../util";
 import { GameEnd } from "./GameEnd";
 import { Grid } from "./Grid";
-import { GameConfig } from "./types";
+import { GameConfig } from "../types";
 
 interface Props {
   board: string[][];
@@ -22,7 +22,7 @@ export function Board({ board: zeroState, gameConfig, restart }: Props) {
   const [game, setGame] = useState<State>({
     board: null,
     currentPosition: [],
-    won: false,
+    won: null,
     tokens: [],
     targets: [],
   });

@@ -1,9 +1,9 @@
 :root {
   --rowNum: 0;
   --colNum: 0;
-  --cellSize: 50px;
   --cellBackgroundColor: #333333;
   --avatarUrl: url("/images/jedi.svg");
+  --fontFamily: "Nunito", sans-serif;
 }
 
 html,
@@ -13,17 +13,24 @@ body {
   font-weight: 400;
   font-style: normal;
 
-  font-size: 16px;
+  font-size: 10px;
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
   color: #fff;
 }
 
 body {
-  margin: 50px 25%;
+  margin: 0 20%;
   overflow: auto;
 }
 
 p {
   margin: 0;
+}
+
+h2 {
+  font-size: 1.2rem;
 }
 
 button {
@@ -42,7 +49,7 @@ button {
 }
 
 .xs {
-  font-size: 10px;
+  font-size: 0.6rem;
 }
 
 .italic {
@@ -54,7 +61,7 @@ button {
   flex: 1;
   align-items: center;
   flex-direction: column;
-  row-gap: 25px;
+  row-gap: 1rem;
   justify-content: center;
   text-align: center;
 }
@@ -66,20 +73,20 @@ button {
 .grid {
   display: flex;
   flex-direction: column;
-  row-gap: 5px;
+  row-gap: 0.2rem;
 }
 
 .row {
   display: flex;
   flex-direction: row;
-  column-gap: 5px;
+  column-gap: 0.2rem;
 }
 
 .item {
   background: var(--cellBackgroundColor);
   border: none;
-  width: 50px;
-  height: 50px;
+  width: 3rem;
+  height: 3rem;
 }
 
 .overlay {
@@ -91,33 +98,6 @@ button {
   background: black;
   height: 100%;
   width: 100%;
-}
-
-.playAgain {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.playAgain .message {
-  color: white;
-  font-weight: bold;
-}
-
-.playAgain button {
-  width: 150px;
-  height: 50px;
-  border: none;
-  outline: none; /*not ideal*/
-  border-radius: 10px;
-  background: white;
-  font-size: 18px;
 }
 
 .avatar {
@@ -204,10 +184,6 @@ button {
   background-color: #4d4d4d;
 }
 
-.trophy {
-  width: 100px;
-  height: 100px;
-}
 .hidden {
   display: none;
 }

@@ -1,0 +1,12 @@
+.howToPlay {
+  font-family: var(--fontFamily);
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.instructions ul {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
